@@ -1,0 +1,14 @@
+DEPOT Centralny {
+    SECTION Elektronika {
+        PRODUCT Laptop { CATEGORY Komputery, 10, UNIT pc }
+        PRODUCT Smartfon { CATEGORY Telefony, 5, UNIT pc }
+    }
+    SECTION Odziez {
+        PRODUCT Koszulka { CATEGORY Ubrania, 20, UNIT pc }
+        PRODUCT Spodnie { CATEGORY Ubrania, 15, UNIT pc }
+    }
+    EMPLOYEES {
+        EMPLOYEE Jan Kowalski { Magazynier, 01/01/2022, SECTION Elektronika }
+        EMPLOYEE Anna Nowak { Kierownik, 15/03/2022, SECTION Odziez, Elektronika}
+    }
+}
