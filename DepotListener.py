@@ -38,8 +38,7 @@ class DepotListener(DepotParserListener):
 
 
     def enterSection_name(self, ctx:DepotParser.Section_nameContext):
-        if self.current_section is not None:
-            self.current_section.name = ctx.getText()
+        self.current_section.name = ctx.getText()
 
 
 
@@ -84,8 +83,8 @@ class DepotListener(DepotParserListener):
 
     def enterEmployment_date(self, ctx:DepotParser.Employment_dateContext):
         self.current_employee.employment_date = ctx.getText()
+            
 
-    def enterEmployee_sections(self, ctx:DepotParser.Employee_sectionsContext):
-        for name in ctx.section_name():
-            self.current_employee.add_section(name.getText())
+    def enterEmployee_section_name(self, ctx:DepotParser.Employee_section_nameContext):
+        self.current_employee.add_section(ctx.getText())
             
