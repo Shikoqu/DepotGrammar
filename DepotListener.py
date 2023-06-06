@@ -19,8 +19,9 @@ class DepotListener(DepotParserListener):
         self.current_depot = Depot()
 
     def exitDepot(self, ctx:DepotParser.DepotContext):
+        self.current_depot.normalize()
         self.data = self.current_depot
-        # self.current_depot = None
+        self.current_depot = None
 
 
     def enterDepot_name(self, ctx:DepotParser.Depot_nameContext):
@@ -32,12 +33,13 @@ class DepotListener(DepotParserListener):
         self.current_section = Section()
 
     def exitSection(self, ctx:DepotParser.SectionContext):
-        self.current_depot.sections.append(self.current_section)
-        # self.current_section = None
+        self.current_depot.add_section(self.current_section)
+        self.current_section = None
 
 
     def enterSection_name(self, ctx:DepotParser.Section_nameContext):
-        self.current_section.name = ctx.getText()
+        if self.current_section is not None:
+            self.current_section.name = ctx.getText()
 
 
 
@@ -45,7 +47,7 @@ class DepotListener(DepotParserListener):
         self.current_product = Product()
 
     def exitProduct(self, ctx:DepotParser.ProductContext):
-        self.current_section.products.append(self.current_product)
+        self.current_section.add_product(self.current_product)
         # self.current_product = None
 
 
@@ -67,8 +69,8 @@ class DepotListener(DepotParserListener):
         self.current_employee = Employee()
 
     def exitEmployee(self, ctx:DepotParser.EmployeeContext):
-        self.current_depot.employees.append(self.current_employee)
-        # self.current_employee = None
+        self.current_depot.add_employee(self.current_employee)
+        self.current_employee = None
 
 
     def enterName(self, ctx:DepotParser.NameContext):
@@ -84,4 +86,6 @@ class DepotListener(DepotParserListener):
         self.current_employee.employment_date = ctx.getText()
 
     def enterEmployee_sections(self, ctx:DepotParser.Employee_sectionsContext):
-        self.current_employee.sections = [name.getText() for name in ctx.section_name()]
+        for name in ctx.section_name():
+            self.current_employee.add_section(name.getText())
+            

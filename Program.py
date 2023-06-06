@@ -41,8 +41,9 @@ def main():
 
     my_depot = listener.data
 
-    print(my_depot.save(indent='|'))
+    print('done')
+    print(my_depot.__str__(indent='|'))
+
 
 if __name__ == '__main__':
-    print('running main')
     main()
