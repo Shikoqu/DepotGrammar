@@ -1,7 +1,7 @@
 from antlr4 import *
-from grammar.DepotParser import DepotParser
-from grammar.DepotParserListener import DepotParserListener
-from Units import *
+
+from grammar import DepotParser, DepotParserListener
+from units import Depot, Section, Product, Employee
 
 # This class defines a complete listener for a parse tree produced by DepotParser.
 class DepotListener(DepotParserListener):

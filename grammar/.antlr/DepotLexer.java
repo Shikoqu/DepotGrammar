@@ -1,4 +1,4 @@
-// Generated from /Users/jakubwadrzyk/Documents/Programing/Python/Kompilatory/Depot/grammar/DepotLexer.g4 by ANTLR 4.9.2
+// Generated from /Users/jakubwadrzyk/Documents/Programing/Python/Kompilatory/DepotGrammar/grammar/DepotLexer.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

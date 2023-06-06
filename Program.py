@@ -1,10 +1,7 @@
 from antlr4 import *
-from grammar.DepotParser import DepotParser
-from grammar.DepotLexer import DepotLexer
-from grammar.DepotParser import DepotParser
-from DepotListener import *
-from Units import *
 
+from DepotListener import DepotListener
+from grammar import DepotLexer, DepotParser
 
 def parse(code: str) -> DepotParser:
     # Utwórz strumień wejściowy dla analizy składniowej
@@ -29,18 +26,23 @@ def traverse_tree(node, indent=''):
             traverse_tree(child, indent + '  ')
 
 
-code = open('example.txt').read()
+def main():
+    code = open('example.txt').read()
 
-parser = parse(code)
-tree = parser.program()
+    parser = parse(code)
+    tree = parser.program()
 
-# Utwórz instancję listenera
-listener = DepotListener()
+    # Utwórz instancję listenera
+    listener = DepotListener()
 
-# Przechodź przez drzewo rozbioru i wywołuj metody listenera
-walker = ParseTreeWalker()
-walker.walk(listener, tree)
+    # Przechodź przez drzewo rozbioru i wywołuj metody listenera
+    walker = ParseTreeWalker()
+    walker.walk(listener, tree)
 
-my_depot = listener.data
+    my_depot = listener.data
 
-print(my_depot.save(indent='|'))
+    print(my_depot.save(indent='|'))
+
+if __name__ == '__main__':
+    print('running main')
+    main()
