@@ -10,9 +10,21 @@ class UnitList(ABC):
         
     @property
     def keys(self):
+        """Key used to tell units apart.
+        
+        Units with the same key are considered equal.
+        
+        Returns:
+            - Returns a list of keys of the units in the list.
+        """
         return [d.key for d in self.data]
     
     def normalize(self):
+        """Normalizes the unit list.
+        
+        Removes duplicates and merges units with the same key.
+        Then normalizes each unit.
+        """
         norm = {}
         for unit in self.data:
             if unit.key not in norm:
@@ -24,6 +36,8 @@ class UnitList(ABC):
         self.data = list(norm.values())
 
     def add(self, unit: Unit):
+        """Adds a unit to the list.
+        """
         if unit.key not in self.keys:
             self.data.append(unit)
         else:
@@ -31,21 +45,68 @@ class UnitList(ABC):
             this_unit.merge(unit)
     
     def add_all(self, units: 'UnitList'):
+        """Adds all units from another unit list.
+        """
         for unit in units.data:
             self.add(unit)
     
     
     def find(self, key) -> Unit:
+        """Finds a unit with a given key.
+        
+        Assumes that there is only one unit with the given key.
+
+        Args:
+            - key: The key of the unit to find.
+
+        Returns:
+            - Unit: Returns the unit with the given key or None if not found.
+        """
         return next((d for d in self.data if d.key == key), None)
     
-    def sort_inplace(self, key):
+    def sort_inplace(self, key) -> 'UnitList':
+        """Sorts the unit list in place.
+
+        Args:
+            - key (lambda exp): The key to sort by.
+
+        Returns:
+            - self
+        """
         self.data.sort(key=key)
         return self
     
     def __iter__(self):
+        """Iterates over the units in the list.
+        
+        Implements Iterator Protocol - allows to iterate over the unit list.
+        
+        ```
+            for unit in unit_list:
+                ...
+        ```
+        instead of
+        ```
+            for unit in unit_list.data:
+                ...
+        ```
+        
+        """
         return iter(self.data)
     
     def __len__(self):
+        """Returns the number of units in the list.
+        
+        Implements the len() function.
+        
+        ```
+            len(unit_list)
+        ```
+        instead of
+        ```
+            len(unit_list.data)
+        ```
+        """
         return len(self.data)
     
     @abstractmethod
