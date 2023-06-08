@@ -17,15 +17,6 @@ def parse(code: str) -> DepotParser:
     return parser
 
 
-# Przejście przez drzewo rozbioru i przetwarzanie
-def traverse_tree(node, indent=''):
-    if isinstance(node, TerminalNode):
-        print(indent + node.getText())
-    else:
-        for child in node.getChildren():
-            traverse_tree(child, indent + '  ')
-
-
 def main():
     code = open('example.txt').read()
 
@@ -39,10 +30,10 @@ def main():
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
 
-    my_depot = listener.data
+    my_depot = listener.depot
 
     print('done')
-    print(my_depot.__str__(indent='|'))
+    print(my_depot)
 
 
 if __name__ == '__main__':

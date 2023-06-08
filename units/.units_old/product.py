@@ -1,12 +1,12 @@
 from enum import Enum
 
-from .unit import Unit
+from unit import Unit
 
 
 class Product(Unit):
     """Class representing a product.
     """
-    class Punit(Enum):
+    class Unit(Enum):
         PIECE = 'pc'
         KILOGRAM = 'kg'
         LITER = 'l'
@@ -18,7 +18,7 @@ class Product(Unit):
                  name: str = None,
                  category: str = None,
                  quantity: int = None,
-                 unit: Punit = None):
+                 unit: Unit = None):
         """Initializes a product.
         
         Args:
@@ -30,21 +30,24 @@ class Product(Unit):
         super().__init__(name)
         self.category: str = category
         self.quantity: int = quantity
-        self.unit: Product.Punit = unit
+        self.unit: Product.Unit = unit
         
     @property
     def key(self):
         return (self.name, self.category)
     
     def normalize(self):
-        pass
-            
-    def merge(self, other: 'Product'):
-        if self is other:
-            return
-        self.quantity += other.quantity
+        """Normalizes the product.
         
-
+        Converts the quantity to int and the unit to Product.Unit enum.
+        Assumes that quantity is a number and unit is in correct format (pc/kg/l/m/m2/m3).
+        """
+        if type(self.quantity) is not int:
+            self.quantity = int(self.quantity)
+        if type(self.unit) is not Product.Unit:
+            self.unit = Product.Unit(self.unit)
+        
+        
     def __str__(self, indent='') -> str:
         return indent + f'PRODUCT {self.name} ' + '{' + f'{self.category}, {self.quantity}, {self.unit}' + '}'
 
