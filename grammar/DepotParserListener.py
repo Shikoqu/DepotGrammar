@@ -233,5 +233,14 @@ class DepotParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DepotParser#employee_section_name.
+    def enterEmployee_section_name(self, ctx:DepotParser.Employee_section_nameContext):
+        pass
+
+    # Exit a parse tree produced by DepotParser#employee_section_name.
+    def exitEmployee_section_name(self, ctx:DepotParser.Employee_section_nameContext):
+        pass
+
+
 
 del DepotParser

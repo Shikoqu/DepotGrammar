@@ -31,10 +31,12 @@ employees_body: '{' employee* '}';
 
 employee: 'EMPLOYEE' name surname employee_body;
 employee_body: '{' office ',' employment_date ',' employee_sections '}';
-employee_sections: 'SECTION' section_name (',' section_name)*;
+employee_sections:
+	'SECTION' employee_section_name (',' employee_section_name)*;
 
 name: ID;
 surname: ID;
 office: ID;
 employment_date: DATE;
+employee_section_name: ID+;
 
