@@ -37,9 +37,16 @@ class Employee(Unit):
     def key(self):
         return (self.name, self.surname)
     
-    def add_section(self, section_name: str):
-        if section_name not in self.sections.keys:
-            self.sections.add(self.depot.sections.find(section_name))
+    def add_section(self, section_key: str):
+        """Adds a section to the employee.
+        
+        Finds the section (using key) in the depot and adds it to the employee sections.
+
+        Args:
+            - section_key (str): string representation of the section key.
+        """
+        if section_key not in self.sections.keys:
+            self.sections.add(self.depot.sections.find(section_key))
     
     def normalize(self):
         pass
