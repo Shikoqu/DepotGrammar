@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import List, Optional
 
 from .unit import Unit
+from .product import Product
 from .product_list import ProductList
 
 
@@ -33,6 +34,28 @@ class Section(Unit):
             return
         self.products.add_all(other.products)
         self.normalize()
+        
+    
+    def contains_any(self, products: List[Product], product_filter = None) -> bool:
+        for product in products:
+            if self.contains(product, product_filter):
+                return True
+        return False
+    
+    def contains_all(self, products: List[Product], product_filter = None) -> bool:
+        for product in products:
+            if not self.contains(product, product_filter):
+                return False
+        return True
+    
+    def contains(self, product: Product, product_filter = None) -> bool:
+        if product_filter is not None:
+            if self.products.filter(filter=lambda p: product_filter(p) == product_filter(product)) is not None:
+                return True
+        else: # product_filter is None
+            if self.products.find(product.key) is not None:
+                return True
+        return False
     
         
     def __str__(self, indent='') -> str:
