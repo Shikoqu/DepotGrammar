@@ -1,11 +1,11 @@
 from datetime import datetime
 from antlr4 import *
 
-from grammar import DepotParser, DepotParserListener
-from units import Depot, Section, Product, Employee
+from .DepotParser import DepotParser
+from ..units import Depot, Section, Product, Employee
 
 # This class defines a complete listener for a parse tree produced by DepotParser.
-class DepotListener(DepotParserListener):
+class DepotListener(ParseTreeListener):
     def __init__(self):
         self.current_depot: Depot = None
         self.current_section: Section = None

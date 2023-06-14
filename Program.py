@@ -1,40 +1,11 @@
 from datetime import date
-from antlr4 import *
 
-from DepotListener import DepotListener
-from grammar import DepotLexer, DepotParser
-
-from units.employee import Employee
-from units.product import Product
-
-def parse(code: str) -> DepotParser:
-    # Utwórz strumień wejściowy dla analizy składniowej
-    input_stream = InputStream(code)
-
-    # Utwórz lekser
-    lexer = DepotLexer(input_stream)
-    token_stream = CommonTokenStream(lexer)
-
-    # Utwórz parser
-    parser = DepotParser(token_stream)
-    
-    return parser
+import DepotGrammar
+from DepotGrammar import Depot, Section, Product, Employee
 
 
 def main():
-    code = open('example.txt').read()
-
-    parser = parse(code)
-    tree = parser.program()
-
-    # Utwórz instancję listenera
-    listener = DepotListener()
-
-    # Przechodź przez drzewo rozbioru i wywołuj metody listenera
-    walker = ParseTreeWalker()
-    walker.walk(listener, tree)
-
-    my_depot = listener.depot
+    my_depot = DepotGrammar.read('example.txt')
 
     print(my_depot)
     my_depot.employees.add(Employee(my_depot, 'Krystian', 'Sitarz', 'Kierownik', date(2020, 1, 1)))
