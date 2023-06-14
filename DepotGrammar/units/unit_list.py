@@ -63,16 +63,22 @@ class UnitList:
         """
         return next((u for u in self.data if u.key == key), None)
     
-    def sort_inplace(self, key) -> 'UnitList':
+    def sort_inplace(self, key=None) -> 'UnitList':
         """Sorts the unit list in place.
 
         Args:
-            - key (lambda exp): The key to sort by.
+            - key (lambda exp): The key to sort by. Defaults to None.
+            
+        if key is None:
+        the units are sorted by their key.
 
         Returns:
             - self
         """
-        self.data.sort(key=key)
+        if key is not None:
+            self.data.sort(key=key)
+        else:
+            self.data.sort(key=lambda u: u.key)
         return self
     
     def __iter__(self):
@@ -117,6 +123,18 @@ class UnitList:
             return None
         return unit_list
     
-    def sort(self, key) -> 'UnitList':
-        return UnitList(sorted(self.data, key=key))
-    
+    def sort(self, key = None) -> 'UnitList':
+        """Makes a sorted copy of the unit list.
+
+        Args:
+            - key (lambda exp): The key to sort by. Defaults to None.
+            
+        if key is None:
+        the units are sorted by their key.
+
+        Returns:
+            - UnitList: Sorted copy of the unit list.
+        """
+        if key is not None:
+            return UnitList(sorted(self.data, key=key))
+        return UnitList(sorted(self.data, key=lambda x: x.key))

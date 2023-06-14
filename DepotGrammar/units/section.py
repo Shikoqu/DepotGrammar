@@ -12,8 +12,8 @@ class Section(Unit):
         """Initializes a section.
 
         Args:
-            - name (str, optional): name of the section. Defaults to None.
-            - products (Optional[ProductList], optional): products in the section. Defaults to None.
+            - name (str): name of the section. Defaults to None.
+            - products (Optional[ProductList]): products in the section. Defaults to None.
         """
         super().__init__(name)
         self.products: ProductList = products or ProductList()
@@ -37,18 +37,54 @@ class Section(Unit):
         
     
     def contains_any(self, products: List[Product], product_filter = None) -> bool:
+        """Check if the section contains any of the products.
+
+        Args:
+            - products (List[Product]): List of products to check
+            - product_filter (lambda exp): Tells what atributes to look for in products. Defaults to None.
+            
+        if product_filter is None:
+        checks products by their key
+
+        Returns:
+            - bool: True if the section contains any of the products, False otherwise.
+        """
         for product in products:
             if self.contains(product, product_filter):
                 return True
         return False
     
     def contains_all(self, products: List[Product], product_filter = None) -> bool:
+        """Check if the section contains all of the products.
+
+        Args:
+            - products (List[Product]): List of products to check
+            - product_filter (lambda exp): Tells what atributes to look for in products. Defaults to None.
+            
+        if product_filter is None:
+        checks products by their key
+
+        Returns:
+            - bool: True if the section contains all of the products, False otherwise.
+        """
         for product in products:
             if not self.contains(product, product_filter):
                 return False
         return True
     
     def contains(self, product: Product, product_filter = None) -> bool:
+        """Check if the section contains the product.
+
+        Args:
+            - product (Product): Product to check
+            - product_filter (lambda exp): Tells what atributes to look for in products. Defaults to None.
+            
+        if product_filter is None:
+        checks products by their key
+
+        Returns:
+            - bool: True if the section contains the product, False otherwise.
+        """
         if product_filter is not None:
             if self.products.filter(filter=lambda p: product_filter(p) == product_filter(product)) is not None:
                 return True

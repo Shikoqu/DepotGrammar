@@ -22,10 +22,10 @@ class Product(Unit):
         """Initializes a product.
         
         Args:
-            - name (str, optional): name of the product. Defaults to None.
-            - category (str, optional): category of the product. Defaults to None.
-            - quantity (int, optional): quantity of the product. Defaults to None.
-            - unit (Unit, optional): unit of the quantity (pc/kg/l//m/m2/m3). Defaults to None.
+            - name (str): name of the product. Defaults to None.
+            - category (str): category of the product. Defaults to None.
+            - quantity (int): quantity of the product. Defaults to None.
+            - unit (Unit): unit of the quantity (pc/kg/l//m/m2/m3). Defaults to None.
         """
         super().__init__(name)
         self.category: str = category

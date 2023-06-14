@@ -19,11 +19,11 @@ class Employee(Unit):
         """Initializes an employee.
         
         Args:
-            - name (str, optional): Defaults to None.
-            - surname (str, optional): Defaults to None.
-            - office (str, optional): Defaults to None.
-            - employment_date (date, optional): format - %d/%m/%Y. Defaults to None.
-            - sections (Optional[List[Section]], optional): Section must be already in depot. Defaults to None.
+            - name (str): Defaults to None.
+            - surname (str): Defaults to None.
+            - office (str): Defaults to None.
+            - employment_date (date): format - %d/%m/%Y. Defaults to None.
+            - sections (Optional[List[Section]]): Section must be already in depot. Defaults to None.
         """
         self.depot: Depot = depot
         super().__init__(name)

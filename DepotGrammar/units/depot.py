@@ -15,9 +15,9 @@ class Depot(Unit):
         """Initializes the depot.
         
         Args:
-            - name (str, optional): Defaults to None.
-            - sections (Optional[List[Section]], optional): Defaults to None.
-            - employees (Optional[List[Employee]], optional): Defaults to None.
+            - name (str): Defaults to None.
+            - sections (Optional[List[Section]]): Defaults to None.
+            - employees (Optional[List[Employee]]): Defaults to None.
         """
         super().__init__(name)
         self.sections: SectionList = sections or SectionList()
