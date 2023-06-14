@@ -54,12 +54,3 @@ class Depot(Unit):
         str_builder += indent + '}'
         return str_builder
     
-    def save(self, filename: str):
-        """Saves the depot to a file using depot grammar.
-        
-        Args:
-            filename (str): Name of the file to be saved to.
-        """
-        with open(filename, 'w') as f:
-            f.write(self.__str__())
-    
