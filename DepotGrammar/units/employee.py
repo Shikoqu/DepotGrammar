@@ -1,9 +1,8 @@
-from datetime import date, datetime
+from datetime import date
 from typing import Optional
 
 from .depot import Depot
 from .unit import Unit
-from .section import Section
 from .section_list import SectionList
 
 

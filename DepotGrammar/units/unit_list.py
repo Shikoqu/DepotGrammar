@@ -1,10 +1,9 @@
-from abc import ABC, abstractmethod
 from typing import List, Optional
 
 from .unit import Unit
 
 
-class UnitList(ABC):
+class UnitList:
     def __init__(self, data: Optional[List] = None):
         self.data: List = data or []
         
@@ -62,7 +61,7 @@ class UnitList(ABC):
         Returns:
             - Unit: Returns the unit with the given key or None if not found.
         """
-        return next((d for d in self.data if d.key == key), None)
+        return next((u for u in self.data if u.key == key), None)
     
     def sort_inplace(self, key) -> 'UnitList':
         """Sorts the unit list in place.
@@ -109,20 +108,15 @@ class UnitList(ABC):
         """
         return len(self.data)
     
-    @abstractmethod
-    def filter(self, filter):
-        # unit_list = UnitList()
-        # for d in self.data:
-        #     if filter(d):
-        #         unit_list.units.append(d)
-        # return unit_list
-        pass
+    def filter(self, filter) -> 'UnitList | None':
+        unit_list = UnitList()
+        for d in self.data:
+            if filter(d):
+                unit_list.data.append(d)
+        if len(unit_list) == 0:
+            return None
+        return unit_list
     
-    def filter_inplace(self, filter):
-        self.units = self.filter(filter).units
-        return self
-    
-    @abstractmethod
-    def sort(self, key):
-        pass
+    def sort(self, key) -> 'UnitList':
+        return UnitList(sorted(self.data, key=key))
     
